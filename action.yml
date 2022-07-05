@@ -1,0 +1,34 @@
+#CONCEPT: https://github.com/Amadevus/pwsh-script
+#GUIDE: https://docs.github.com/en/actions/creating-actions/creating-a-javascript-action
+name: 'Stop Windows Service'
+description: 'Shutdown and windows service with creds'
+inputs:
+  WINDOWSSERVICE_NAME: 
+    description: 'Name of windows service can have *'
+    required: true
+    default: 'Tomcat*'
+  SERVICE_ACCOUNT : 
+    description: 'Service Account used to shutdown Service *'
+    required: true
+  SERVICE_PASSWORD : 
+    description: 'make this secrets.SERVICE_PASSWORD'
+    required: true
+outputs:
+  result:
+    description: Return value of script execution
+    value: ${{ steps.script.outputs.result }}
+  error:
+    description: Exception details, if any was thrown during script execution.
+    value: ${{ steps.script.outputs.error }}
+runs:
+  using: composite
+  steps:
+    - run: ${{ github.action_path }}/shutdownWindowsService.ps1
+      id: script
+      shell: pwsh
+      env:
+        TEMP: ${{ runner.temp }}
+        WINDOWSSERVICE_NAME: ${{ inputs.WINDOWSSERVICE_NAME }}
+branding:
+  icon: terminal
+  color: blue
