@@ -25,7 +25,7 @@ $pw = convertto-securestring -AsPlainText -Force -String $gitHubUserPassword
 $cred = new-object -typename System.Management.Automation.PSCredential -argumentlist "$env:SERVICE_ACCOUNT" ,$pw
 
 #As we have a cluster of servers this should allow us to have one step kill on each box make sure you add comma after each box
-$servers = "$env:SERVER_NAME"
+$servers = "$env:SERVER_NAMES"
 $serversArray =$servers.Split(",")
 
 $i=0

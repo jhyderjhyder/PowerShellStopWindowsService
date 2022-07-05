@@ -13,6 +13,9 @@ inputs:
   SERVICE_PASSWORD : 
     description: 'make this secrets.SERVICE_PASSWORD'
     required: true
+  SERVER_NAMES : 
+    description: 'servernames use comma for more than one'
+    required: true
 outputs:
   result:
     description: Return value of script execution
@@ -31,6 +34,8 @@ runs:
         WINDOWSSERVICE_NAME: ${{ inputs.WINDOWSSERVICE_NAME }}
         SERVICE_PASSWORD: ${{ inputs.SERVICE_PASSWORD }}
         SERVICE_ACCOUNT: ${{ inputs.SERVICE_ACCOUNT }}
+        SERVER_NAMES: ${{ inputs.SERVER_NAMES }}
+        
 branding:
   icon: terminal
   color: blue
